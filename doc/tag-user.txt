@@ -1,0 +1,138 @@
+*tag-user.txt*	Extensible :tag wrapper
+
+Version 0.0.0
+Copyright (C) 2018 Kana Natsuno <https://whileimautomaton.net/>
+License: MIT license  {{{
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+}}}
+
+CONTENTS					*tag-user-contents*
+
+Introduction            |tag-user-introduction|
+Interface               |tag-user-interface|
+  Commands                |tag-user-commands|
+  Functions               |tag-user-functions|
+  Key Mappings            |tag-user-key-mappings|
+  Variables               |tag-user-variables|
+Examples                |tag-user-examples|
+Bugs                    |tag-user-bugs|
+Changelog               |tag-user-changelog|
+
+
+
+
+==============================================================================
+INTRODUCTION					*tag-user-introduction*
+
+*tag-user* is a Vim plugin to provide extensible wrapper for |:tag|.  :tag is
+a useful command, but it sometimes does not work well for several languages
+with method overriding/overloading.  Because :tag just uses a target
+identifier, and it does not consider the context of a target identifier.
+
+This plugin provides a per-|filetype| hook to extend :tag to use also the
+context of a target identifier.
+
+
+Requirements:
+- Vim 8.0 or later
+
+Latest version:
+https://github.com/kana/vim-tag-user
+
+
+
+
+==============================================================================
+INTERFACE					*tag-user-interface*
+
+------------------------------------------------------------------------------
+COMMANDS					*tag-user-commands*
+
+:[count]Tag[!] [ident]				*:Tag*
+			Wrapped version of |:tag|.
+
+
+------------------------------------------------------------------------------
+FUNCTIONS					*tag-user-functions*
+
+(This plugin does not provide public functions.)
+
+
+------------------------------------------------------------------------------
+KEY MAPPINGS					*tag-user-key-mappings*
+
+DEFAULT KEY MAPPINGS				*tag-user-default-key-mappings*
+
+Modes	{lhs}		{rhs}
+------------------------------------------------
+n	<C-]>		|<Plug>(tag-user-<C-]>)|
+
+
+NAMED KEY MAPPINGS				*tag-user-named-key-mappings*
+
+<Plug>(tag-user-<C-]>)				*<Plug>(tag-user-<C-]>)*
+			Wrapped version of |CTRL-]|.
+
+
+------------------------------------------------------------------------------
+VARIABLES					*tag-user-variables*
+
+                                                *b:tag_user_guess*
+b:tag_user_guess	string	(default: undefined)
+        A function name.  This function:
+        
+        - is called whenever |:Tag| and |<Plug>(tag-user-<C-]>)| are used.
+        - must take 0 arguments.
+        - must return a number which is used as a {count} for |:tag|.
+        - may move the cursor position.  But it must be restored.
+
+
+
+
+==============================================================================
+EXAMPLES					*tag-user-examples*
+
+(A) See https://github.com/kana/vim-tag-php for PHP.
+
+
+
+
+==============================================================================
+BUGS						*tag-user-bugs*
+
+- Many :tag-related key mappings are not defined yet, for example, |g]|,
+  |v_CTRL-]|, and others.  Because they are rarely used.
+
+- See also https://github.com/kana/vim-tag-user/issues
+
+
+
+
+==============================================================================
+CHANGELOG					*tag-user-changelog*
+
+0.0.0	2018-02-21T01:07:16+09:00		*tag-user-changelog-0.0.0*
+        - Derived from https://github.com/kana/vim-better-tag-jump
+
+
+
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:fen:fdl=0:fdm=marker:
