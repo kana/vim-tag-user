@@ -32,6 +32,8 @@ command! -bang -bar -complete=tag -count -nargs=? Tag
 nnoremap <Plug>(tag-user-<C-]>)
 \ :<C-u>call tag#user#_cmd_Tag(v:count, '', expand('<cword>'))<Return>
 
+silent! nmap <unique> <C-]>  <Plug>(tag-user-<C-]>)
+
 let g:loaded_tag_user = 1
 
 " __END__
