@@ -17,12 +17,32 @@ function! s:pattern(jump_command, expected_file_line_col, hook)
   Expect [expand('%'), line('.'), col('.')] ==# a:expected_file_line_col
 endfunction
 
-describe ':Tag'
-  it 'behaves the same as :tag for not configured files'
+describe 'tag-user'
+  after
+    % bdelete
+  end
+
+  it 'behaves the same as :tag for not configured files with :Tag'
     call s:pattern('Tag doSomething', ['t/fixtures/aaa.php', 5, 1], 0)
   end
 
-  it 'jumps to more better place according to b:tag_user_guess'
+  it 'behaves the same as :tag for not configured files with <C-]>'
+    call s:pattern("normal \<C-]>", ['t/fixtures/aaa.php', 5, 1], 0)
+  end
+
+  it 'behaves the same as :tag for not configured files with <Plug>(tag-user-<C-]>)'
+    call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/aaa.php', 5, 1], 0)
+  end
+
+  it 'jumps to more better place according to b:tag_user_guess with :Tag'
     call s:pattern('Tag doSomething', ['t/fixtures/bbb.php', 5, 1], 'Guess')
+  end
+
+  it 'jumps to more better place according to b:tag_user_guess with <C-]>'
+    call s:pattern("normal \<C-]>", ['t/fixtures/bbb.php', 5, 1], 'Guess')
+  end
+
+  it 'jumps to more better place according to b:tag_user_guess with <Plug>(tag-user-<C-]>)'
+    call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/bbb.php', 5, 1], 'Guess')
   end
 end
