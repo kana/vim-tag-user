@@ -56,7 +56,7 @@ describe 'tag-user'
     end
 
     it 'uses another identifier if b:tag_user_guess returns so'
-      call s:pattern('Tag doSomething', ['t/fixtures/ccc.php', 3, 1], 'Guess2')
+      call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/ccc.php', 3, 1], 'Guess2')
     end
   end
 end
