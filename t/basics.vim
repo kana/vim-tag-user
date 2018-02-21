@@ -31,8 +31,8 @@ describe 'tag-user'
       call s:pattern('Tag doSomething', ['t/fixtures/aaa.php', 5, 1], 0)
     end
 
-    it 'jumps to more better place according to b:tag_user_guess'
-      call s:pattern('Tag doSomething', ['t/fixtures/bbb.php', 5, 1], 'Guess1')
+    it 'behaves the same as :tag even if b:tag_user_guess is defined'
+      call s:pattern('Tag doSomething', ['t/fixtures/aaa.php', 5, 1], 'Guess1')
     end
   end
 
