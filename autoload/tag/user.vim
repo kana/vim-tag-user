@@ -22,7 +22,7 @@
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
 
-function! tag#user#_jump(use_context, count, bang, ident)
+function! tag#user#_jump(count, bang, ident)
   let s_count = a:count == 0 ? '' : a:count
   if a:ident == ''
     execute s_count 'tag'.a:bang
@@ -30,7 +30,7 @@ function! tag#user#_jump(use_context, count, bang, ident)
   endif
 
   let s_ident = a:ident
-  if a:use_context && exists('b:tag_user_guess')
+  if exists('b:tag_user_guess')
     let [c, ident] = {b:tag_user_guess}()
     if c != 0
       let s_count = c
