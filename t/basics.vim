@@ -38,19 +38,22 @@ function! s:pattern(jump_command, expected_file_line_col, hook)
   Expect [expand('%'), line('.'), col('.')] ==# a:expected_file_line_col
 endfunction
 
+describe '<C-]>'
+  it 'is bound to <Plug>(tag-user-<C-]>)'
+    let maparg = maparg('<C-]>', 'n', 0, 1)
+    Expect maparg.lhs ==# '<C-]>'
+    Expect maparg.rhs ==# '<Plug>(tag-user-<C-]>)'
+    Expect maparg.silent to_be_false
+    Expect maparg.noremap to_be_false
+    Expect maparg.expr to_be_false
+    Expect maparg.buffer to_be_false
+    Expect maparg.mode ==# 'n'
+  end
+end
+
 describe 'tag-user'
   after
     % bdelete
-  end
-
-  context '<C-]>'
-    it 'behaves the same as :tag for not configured files'
-      call s:pattern("normal \<C-]>", ['t/fixtures/aaa.php', 5, 1], 0)
-    end
-
-    it 'jumps to more better place according to b:tag_user_guess'
-      call s:pattern("normal \<C-]>", ['t/fixtures/bbb.php', 5, 1], 'Guess1')
-    end
   end
 
   context '<Plug>(tag-user-<C-]>)'
