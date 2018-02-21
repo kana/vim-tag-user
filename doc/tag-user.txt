@@ -27,7 +27,6 @@ CONTENTS					*tag-user-contents*
 
 Introduction            |tag-user-introduction|
 Interface               |tag-user-interface|
-  Functions               |tag-user-functions|
   Key Mappings            |tag-user-key-mappings|
   Variables               |tag-user-variables|
 Examples                |tag-user-examples|
@@ -60,12 +59,6 @@ https://github.com/kana/vim-tag-user
 
 ==============================================================================
 INTERFACE					*tag-user-interface*
-
-------------------------------------------------------------------------------
-FUNCTIONS					*tag-user-functions*
-
-(This plugin does not provide public functions.)
-
 
 ------------------------------------------------------------------------------
 KEY MAPPINGS					*tag-user-key-mappings*
