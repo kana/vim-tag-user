@@ -22,7 +22,7 @@
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
 
-function! tag#user#_cmd_Tag(count, bang, ident)
+function! tag#user#_jump(count, bang, ident)
   let s_count = a:count == 0 ? '' : a:count
   if a:ident == ''
     execute s_count 'tag'.a:bang
