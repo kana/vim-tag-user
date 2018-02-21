@@ -56,6 +56,17 @@ describe '<Plug>(tag-user-<C-]>)'
     % bdelete
   end
 
+  it 'is bound to a magic stuff'
+    let maparg = maparg('<Plug>(tag-user-<C-]>)', 'n', 0, 1)
+    Expect maparg.lhs ==# '<Plug>(tag-user-<C-]>)'
+    Expect stridx(maparg.rhs, 'tag#user#') != -1
+    Expect maparg.silent to_be_true
+    Expect maparg.noremap to_be_true
+    Expect maparg.expr to_be_false
+    Expect maparg.buffer to_be_false
+    Expect maparg.mode ==# 'n'
+  end
+
   it 'behaves the same as :tag for not configured files'
     call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/aaa.php', 5, 1], 0)
   end
