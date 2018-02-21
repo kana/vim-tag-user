@@ -27,7 +27,6 @@ CONTENTS					*tag-user-contents*
 
 Introduction            |tag-user-introduction|
 Interface               |tag-user-interface|
-  Commands                |tag-user-commands|
   Functions               |tag-user-functions|
   Key Mappings            |tag-user-key-mappings|
   Variables               |tag-user-variables|
@@ -63,13 +62,6 @@ https://github.com/kana/vim-tag-user
 INTERFACE					*tag-user-interface*
 
 ------------------------------------------------------------------------------
-COMMANDS					*tag-user-commands*
-
-:[count]Tag[!] [ident]				*:Tag*
-			Wrapped version of |:tag|.
-
-
-------------------------------------------------------------------------------
 FUNCTIONS					*tag-user-functions*
 
 (This plugin does not provide public functions.)
@@ -98,7 +90,7 @@ VARIABLES					*tag-user-variables*
 b:tag_user_guess	string	(default: undefined)
         A function name.  This function:
         
-        - is called whenever |:Tag| and |<Plug>(tag-user-<C-]>)| are used.
+        - is called whenever |<Plug>(tag-user-<C-]>)| is used.
         - must take 0 arguments.
         - must return a list of [{count}, {ident}], where:
           - {count} is a number which is used as a {count} for |:tag|.

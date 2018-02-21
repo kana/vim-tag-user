@@ -43,16 +43,6 @@ describe 'tag-user'
     % bdelete
   end
 
-  context ':Tag'
-    it 'behaves the same as :tag for not configured files'
-      call s:pattern('Tag doSomething', ['t/fixtures/aaa.php', 5, 1], 0)
-    end
-
-    it 'behaves the same as :tag even if b:tag_user_guess is defined'
-      call s:pattern('Tag doSomething', ['t/fixtures/aaa.php', 5, 1], 'Guess1')
-    end
-  end
-
   context '<C-]>'
     it 'behaves the same as :tag for not configured files'
       call s:pattern("normal \<C-]>", ['t/fixtures/aaa.php', 5, 1], 0)

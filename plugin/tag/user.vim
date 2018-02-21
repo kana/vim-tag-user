@@ -26,9 +26,6 @@ if exists('g:loaded_tag_user')
   finish
 endif
 
-command! -bang -bar -complete=tag -count -nargs=? Tag
-\ call tag#user#_jump(0, <count>, '<bang>', <q-args>)
-
 nnoremap <Plug>(tag-user-<C-]>)
 \ :<C-u>call tag#user#_jump(1, v:count, '', expand('<cword>'))<Return>
 
