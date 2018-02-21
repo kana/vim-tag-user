@@ -51,26 +51,24 @@ describe '<C-]>'
   end
 end
 
-describe 'tag-user'
+describe '<Plug>(tag-user-<C-]>)'
   after
     % bdelete
   end
 
-  context '<Plug>(tag-user-<C-]>)'
-    it 'behaves the same as :tag for not configured files'
-      call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/aaa.php', 5, 1], 0)
-    end
+  it 'behaves the same as :tag for not configured files'
+    call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/aaa.php', 5, 1], 0)
+  end
 
-    it 'jumps to more better place according to b:tag_user_guess'
-      call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/bbb.php', 5, 1], 'Guess1')
-    end
+  it 'jumps to more better place according to b:tag_user_guess'
+    call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/bbb.php', 5, 1], 'Guess1')
+  end
 
-    it 'uses another identifier if b:tag_user_guess returns so'
-      call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/ccc.php', 3, 1], 'Guess2')
-    end
+  it 'uses another identifier if b:tag_user_guess returns so'
+    call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/ccc.php', 3, 1], 'Guess2')
+  end
 
-    it 'uses the context if b:tag_user_guess is defined so'
-      call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/ccc.php', 5, 1], 'Guess3')
-    end
+  it 'uses the context if b:tag_user_guess is defined so'
+    call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/ccc.php', 5, 1], 'Guess3')
   end
 end
