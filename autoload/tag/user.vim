@@ -29,13 +29,17 @@ function! tag#user#_cmd_Tag(count, bang, ident)
     return
   endif
 
+  let s_ident = a:ident
   if exists('b:tag_user_guess')
-    let c = {b:tag_user_guess}()
+    let [c, ident] = {b:tag_user_guess}()
     if c != 0
       let s_count = c
     endif
+    if ident isnot 0
+      let s_ident = ident
+    endif
   endif
-  execute s_count 'tag'.a:bang a:ident
+  execute s_count 'tag'.a:bang s_ident
 endfunction
 
 " __END__  "{{{1
