@@ -100,7 +100,10 @@ b:tag_user_guess	string	(default: undefined)
         
         - is called whenever |:Tag| and |<Plug>(tag-user-<C-]>)| are used.
         - must take 0 arguments.
-        - must return a number which is used as a {count} for |:tag|.
+        - must return a list of [{count}, {ident}], where:
+          - {count} is a number which is used as a {count} for |:tag|.
+          - {ident} is a string which is used as an {ident} for |:tag| instead
+            of the original one.  Use 0 if this replacement is not necessary.
         - may move the cursor position.  But it must be restored.
 
 
