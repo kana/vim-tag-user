@@ -8,6 +8,23 @@ function! Guess2()
   return [0, 'Ccc']
 endfunction
 
+function! Guess3()
+  let pos = getpos('.')
+  let cword = expand('<cword>')
+  normal! ^
+  let prefix = expand('<cword>')
+  call setpos('.', pos)
+
+  let tags = taglist(cword, expand('%'))
+  for tag in tags
+    if has_key(tag, 'class') && tag.class ==# prefix
+      return [index(tags, tag) + 1, 0]
+    endif
+  endfor
+
+  return [0, 0]
+endfunction
+
 function! s:pattern(jump_command, expected_file_line_col, hook)
   edit t/fixtures/doc.md
   call search('doSomething', 'cw')
@@ -57,6 +74,10 @@ describe 'tag-user'
 
     it 'uses another identifier if b:tag_user_guess returns so'
       call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/ccc.php', 3, 1], 'Guess2')
+    end
+
+    it 'uses the context if b:tag_user_guess is defined so'
+      call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/ccc.php', 5, 1], 'Guess3')
     end
   end
 end
