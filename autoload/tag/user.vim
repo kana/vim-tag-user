@@ -22,7 +22,7 @@
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
 
-function! tag#user#_jump(count)
+function! tag#user#_jump(count, precommand)
   let ident = expand('<cword>')
   let s_count = a:count == 0 ? '' : a:count
   if ident == ''
@@ -39,6 +39,10 @@ function! tag#user#_jump(count)
     if ident isnot 0
       let s_ident = ident
     endif
+  endif
+
+  if a:precommand != ''
+    execute a:precommand
   endif
   execute s_count 'tag' s_ident
 endfunction
