@@ -27,6 +27,7 @@ CONTENTS					*tag-user-contents*
 
 Introduction            |tag-user-introduction|
 Interface               |tag-user-interface|
+  Functions               |tag-user-key-functions|
   Key Mappings            |tag-user-key-mappings|
   Variables               |tag-user-variables|
 Examples                |tag-user-examples|
@@ -59,6 +60,22 @@ https://github.com/kana/vim-tag-user
 
 ==============================================================================
 INTERFACE					*tag-user-interface*
+
+------------------------------------------------------------------------------
+FUNCTIONS					*tag-user-key-functions*
+
+tag#user#jump({count}, {precommand})		*tag#user#jump()*
+                        Function version of |<Plug>(tag-user-<C-]>)|.  This is
+                        roughly equivalent to the following commands:
+
+                                :{precommand}
+                                :{count}tag <cword>
+
+                        If the definition of <cword> is not found, these
+                        commands will not be executed.
+
+                        Use 0 to emulate {count} is not specified.
+
 
 ------------------------------------------------------------------------------
 KEY MAPPINGS					*tag-user-key-mappings*
