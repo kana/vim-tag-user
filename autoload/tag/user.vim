@@ -23,14 +23,13 @@
 " }}}
 
 function! tag#user#jump(count, precommand)
-  let ident = expand('<cword>')
+  let s_ident = expand('<cword>')
   let s_count = a:count == 0 ? '' : a:count
-  if ident == ''
+  if s_ident == ''
     execute s_count 'tag'
     return
   endif
 
-  let s_ident = ident
   if exists('b:tag_user_guess')
     let [c, ident] = {b:tag_user_guess}()
     if c != 0
