@@ -76,6 +76,12 @@ tag#user#jump({count}, {precommand})		*tag#user#jump()*
 
                         Use 0 to emulate {count} is not specified.
 
+tag#user#list({ident})				*tag#user#list()*
+                        Wrapped version of |taglist()|.
+                        This is similar to `taglist({ident}, expand('%'))`,
+                        but {ident} is automatically escaped to get tags
+                        exactly matched to {ident}.
+
 
 ------------------------------------------------------------------------------
 KEY MAPPINGS					*tag-user-key-mappings*
