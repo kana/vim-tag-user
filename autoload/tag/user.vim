@@ -40,7 +40,19 @@ function! tag#user#jump(count, precommand)
     endif
   endif
 
-  if a:precommand != '' && s:exists_definition(s_ident)
+  if !s:exists_definition(s_ident)
+    " Show only the last error message without a stack trace.  Because it's
+    " annoying to see multiple lines of message which is not important for
+    " daily use.  Note that this error cannot be :catch'ed as a side effect,
+    " but it's not important too.
+    silent! execute s_count 'tag' s_ident
+    echohl ErrorMsg
+    echomsg v:errmsg
+    echohl None
+    return
+  endif
+
+  if a:precommand != ''
     execute a:precommand
   endif
   execute s_count 'tag' s_ident
