@@ -47,7 +47,11 @@ function! tag#user#jump(count, precommand)
 endfunction
 
 function! s:exists_definition(ident)
-  return len(taglist(a:ident, expand('%'))) > 0
+  return len(taglist(s:full_match_regexp_from(a:ident), expand('%'))) > 0
+endfunction
+
+function! s:full_match_regexp_from(string)
+  return '\V\^' . escape(a:string, '\') . '\$'
 endfunction
 
 " __END__  "{{{1
