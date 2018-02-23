@@ -25,10 +25,10 @@ function! Guess3()
   return [0, 0]
 endfunction
 
-function! s:pattern(jump_command, to, hook)
-  edit t/fixtures/doc.md
-  call search('doSomething', 'cw')
-  Expect [expand('%'), line('.'), col('.')] ==# ['t/fixtures/doc.md', 2, 6]
+function! s:test(jump_command, from, to, hook)
+  edit `=a:from[0]`
+  call cursor(a:from[1], a:from[2])
+  Expect [expand('%'), line('.'), col('.')] ==# a:from
   Expect exists('b:tag_user_guess') to_be_false
   if a:hook isnot 0
     let b:tag_user_guess = a:hook
@@ -68,19 +68,19 @@ describe '<Plug>(tag-user-<C-]>)'
   end
 
   it 'behaves the same as :tag for not configured files'
-    call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/aaa.php', 5, 1], 0)
+    call s:test("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/doc.md', 2, 6], ['t/fixtures/aaa.php', 5, 1], 0)
   end
 
   it 'jumps to more better place according to b:tag_user_guess'
-    call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/bbb.php', 5, 1], 'Guess1')
+    call s:test("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/doc.md', 2, 6], ['t/fixtures/bbb.php', 5, 1], 'Guess1')
   end
 
   it 'uses another identifier if b:tag_user_guess returns so'
-    call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/ccc.php', 3, 1], 'Guess2')
+    call s:test("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/doc.md', 2, 6], ['t/fixtures/ccc.php', 3, 1], 'Guess2')
   end
 
   it 'uses the context if b:tag_user_guess is defined so'
-    call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/ccc.php', 5, 1], 'Guess3')
+    call s:test("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/doc.md', 2, 6], ['t/fixtures/ccc.php', 5, 1], 'Guess3')
   end
 end
 
@@ -90,12 +90,12 @@ describe 'tag#user#jump()'
   end
 
   it 'behaves the same as <Plug>(tag-user-<C-]>)'
-    call s:pattern('call tag#user#jump(0, "")', ['t/fixtures/ccc.php', 3, 1], 'Guess2')
+    call s:test('call tag#user#jump(0, "")', ['t/fixtures/doc.md', 2, 6], ['t/fixtures/ccc.php', 3, 1], 'Guess2')
   end
 
   it 'runs {precommand} before jumping'
     Expect winnr('$') == 1
-    call s:pattern('call tag#user#jump(0, "split")', ['t/fixtures/ccc.php', 3, 1], 'Guess2')
+    call s:test('call tag#user#jump(0, "split")', ['t/fixtures/doc.md', 2, 6], ['t/fixtures/ccc.php', 3, 1], 'Guess2')
     Expect winnr('$') == 2
     wincmd w
     Expect [expand('%'), line('.'), col('.')] ==# ['t/fixtures/doc.md', 2, 6]
