@@ -22,7 +22,7 @@
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
 
-function! tag#user#_jump(count, precommand)
+function! tag#user#jump(count, precommand)
   let ident = expand('<cword>')
   let s_count = a:count == 0 ? '' : a:count
   if ident == ''
