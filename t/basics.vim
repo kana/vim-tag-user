@@ -109,3 +109,15 @@ describe 'tag#user#jump()'
     Expect winnr('$') == 1
   end
 end
+
+describe 'tag#user#list()'
+  before
+    % bdelete
+  end
+
+  it 'returns tags exactly matched to a given identifier'
+    edit t/fixtures/doc.md
+    Expect len(tag#user#list('php')) == 0
+    Expect len(tag#user#list('php_helps_programmers')) == 1
+  end
+end
