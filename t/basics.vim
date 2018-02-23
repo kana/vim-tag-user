@@ -103,7 +103,9 @@ describe 'tag#user#jump()'
 
   it 'does not run {precommand} if the definition is not found'
     Expect winnr('$') == 1
-    call s:test('call tag#user#jump(0, "split")', ['t/fixtures/doc.md', 1, 1], ['t/fixtures/doc.md', 1, 1], 'Guess2')
+    let v:errmsg = ''
+    call s:test('silent! call tag#user#jump(0, "split")', ['t/fixtures/doc.md', 1, 1], ['t/fixtures/doc.md', 1, 1], 0)
+    Expect v:errmsg ==# 'E426: tag not found: php'
     Expect winnr('$') == 1
   end
 end
