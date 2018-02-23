@@ -100,4 +100,10 @@ describe 'tag#user#jump()'
     wincmd w
     Expect [expand('%'), line('.'), col('.')] ==# ['t/fixtures/doc.md', 2, 6]
   end
+
+  it 'does not run {precommand} if the definition is not found'
+    Expect winnr('$') == 1
+    call s:test('call tag#user#jump(0, "split")', ['t/fixtures/doc.md', 1, 1], ['t/fixtures/doc.md', 1, 1], 'Guess2')
+    Expect winnr('$') == 1
+  end
 end
