@@ -58,8 +58,12 @@ function! tag#user#jump(count, precommand)
   execute s_count 'tag' s_ident
 endfunction
 
+function! tag#user#list(ident)
+  return taglist(s:full_match_regexp_from(a:ident), expand('%'))
+endfunction
+
 function! s:exists_definition(ident)
-  return len(taglist(s:full_match_regexp_from(a:ident), expand('%'))) > 0
+  return len(tag#user#list(a:ident)) > 0
 endfunction
 
 function! s:full_match_regexp_from(string)
