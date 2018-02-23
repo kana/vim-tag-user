@@ -139,6 +139,10 @@ BUGS						*tag-user-bugs*
 ==============================================================================
 CHANGELOG					*tag-user-changelog*
 
+0.2.0	2018-02-23T20:32:33+09:00		*tag-user-changelog-0.1.0*
+        - Add |tag#user#list()| to write hooks.
+        - Hide a noisy stack trace if "tag not found" error (|E426|) occurs.
+
 0.1.0	2018-02-23T20:32:33+09:00		*tag-user-changelog-0.1.0*
         - Add |tag#user#jump()| for extra customization.
 
