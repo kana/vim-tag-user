@@ -22,14 +22,15 @@
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
 
-function! tag#user#_jump(count, bang, ident)
+function! tag#user#_jump(count, bang)
+  let ident = expand('<cword>')
   let s_count = a:count == 0 ? '' : a:count
-  if a:ident == ''
+  if ident == ''
     execute s_count 'tag'.a:bang
     return
   endif
 
-  let s_ident = a:ident
+  let s_ident = ident
   if exists('b:tag_user_guess')
     let [c, ident] = {b:tag_user_guess}()
     if c != 0
