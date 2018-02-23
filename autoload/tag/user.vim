@@ -40,10 +40,14 @@ function! tag#user#jump(count, precommand)
     endif
   endif
 
-  if a:precommand != ''
+  if a:precommand != '' && s:exists_definition(s_ident)
     execute a:precommand
   endif
   execute s_count 'tag' s_ident
+endfunction
+
+function! s:exists_definition(ident)
+  return len(taglist(a:ident, expand('%'))) > 0
 endfunction
 
 " __END__  "{{{1
