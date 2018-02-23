@@ -27,7 +27,7 @@ if exists('g:loaded_tag_user')
 endif
 
 nnoremap <silent> <Plug>(tag-user-<C-]>)
-\ :<C-u>call tag#user#_jump(v:count, '', expand('<cword>'))<Return>
+\ :<C-u>call tag#user#jump(v:count, '')<Return>
 
 silent! nmap <unique> <C-]>  <Plug>(tag-user-<C-]>)
 
