@@ -83,3 +83,21 @@ describe '<Plug>(tag-user-<C-]>)'
     call s:pattern("normal \<Plug>(tag-user-\<C-]>)", ['t/fixtures/ccc.php', 5, 1], 'Guess3')
   end
 end
+
+describe 'tag#user#jump()'
+  after
+    % bdelete
+  end
+
+  it 'behaves the same as <Plug>(tag-user-<C-]>)'
+    call s:pattern('call tag#user#jump(0, "")', ['t/fixtures/ccc.php', 3, 1], 'Guess2')
+  end
+
+  it 'runs {precommand} before jumping'
+    Expect winnr('$') == 1
+    call s:pattern('call tag#user#jump(0, "split")', ['t/fixtures/ccc.php', 3, 1], 'Guess2')
+    Expect winnr('$') == 2
+    wincmd w
+    Expect [expand('%'), line('.'), col('.')] ==# ['t/fixtures/doc.md', 2, 6]
+  end
+end
