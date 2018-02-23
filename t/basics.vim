@@ -25,7 +25,7 @@ function! Guess3()
   return [0, 0]
 endfunction
 
-function! s:pattern(jump_command, expected_file_line_col, hook)
+function! s:pattern(jump_command, to, hook)
   edit t/fixtures/doc.md
   call search('doSomething', 'cw')
   Expect [expand('%'), line('.'), col('.')] ==# ['t/fixtures/doc.md', 2, 6]
@@ -35,7 +35,7 @@ function! s:pattern(jump_command, expected_file_line_col, hook)
   endif
 
   execute a:jump_command
-  Expect [expand('%'), line('.'), col('.')] ==# a:expected_file_line_col
+  Expect [expand('%'), line('.'), col('.')] ==# a:to
 endfunction
 
 describe '<C-]>'
