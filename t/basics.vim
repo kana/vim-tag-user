@@ -52,7 +52,7 @@ describe '<C-]>'
 end
 
 describe '<Plug>(tag-user-<C-]>)'
-  after
+  before
     % bdelete
   end
 
@@ -85,7 +85,7 @@ describe '<Plug>(tag-user-<C-]>)'
 end
 
 describe 'tag#user#jump()'
-  after
+  before
     % bdelete
   end
 
