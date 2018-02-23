@@ -22,11 +22,11 @@
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
 
-function! tag#user#_jump(count, bang)
+function! tag#user#_jump(count)
   let ident = expand('<cword>')
   let s_count = a:count == 0 ? '' : a:count
   if ident == ''
-    execute s_count 'tag'.a:bang
+    execute s_count 'tag'
     return
   endif
 
@@ -40,7 +40,7 @@ function! tag#user#_jump(count, bang)
       let s_ident = ident
     endif
   endif
-  execute s_count 'tag'.a:bang s_ident
+  execute s_count 'tag' s_ident
 endfunction
 
 " __END__  "{{{1
